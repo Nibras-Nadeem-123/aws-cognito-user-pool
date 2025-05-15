@@ -19,7 +19,7 @@ export class CreateUserPoolStack extends cdk.Stack {
       standardAttributes: {
         email: {
           required: true,
-          mutable: false,
+          mutable: true,
         },
       },
       passwordPolicy: {
@@ -77,13 +77,16 @@ export class CreateUserPoolStack extends cdk.Stack {
         },
         callbackUrls: [
           'http://localhost:3000/auth/callback/google',
-          'http://localhost:3000/auth/callback/microsoft'
+          'http://localhost:3000/auth/callback/microsoft',
+          'https://aws-cognito-oauth-authentication.vercel.app/auth/callback/google',
+          'https://aws-cognito-oauth-authentication.vercel.app/auth/callback/microsoft'
         ],
         logoutUrls: [
           'https://localhost:3000/auth/logout',
-          'http://localhost:3000/logout'
+          'http://localhost:3000/logout',
+          'https://aws-cognito-oauth-authentication.vercel.app/auth/logout'
         ],
-        defaultRedirectUri: 'http://localhost:3000/auth/callback/google',
+        defaultRedirectUri: 'https://aws-cognito-oauth-authentication.vercel.app/auth/callback/google',
         scopes: [
           cognito.OAuthScope.OPENID,
           cognito.OAuthScope.EMAIL,
